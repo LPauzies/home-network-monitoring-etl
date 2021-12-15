@@ -2,7 +2,7 @@
 .venv/
 
 # Data file
-database/sqlite/*
+database/sqlite/NetworkMonitoring.db
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
