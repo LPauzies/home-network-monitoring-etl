@@ -24,8 +24,8 @@ class ConfigurationParser:
             configurations = json.load(configuration_descriptor)
             for configuration in configurations:
                 parsed_configuration = Configuration(
-                    configuration[ConfigurationModel.IP], 
-                    configuration[ConfigurationModel.DOMAIN], 
+                    configuration[ConfigurationModel.IP],
+                    configuration[ConfigurationModel.DOMAIN],
                     configuration[ConfigurationModel.DESCRIPTION]
                 )
                 parsed_configurations.append(parsed_configuration)

@@ -3,10 +3,5 @@
         "ip": "127.0.0.1",
         "domain": "localhost",
         "description": "loopback of current machine"
-    },
-    {
-        "ip": "127.0.0.1",
-        "domain": "localhost",
-        "description": "loopback of current machine"
     }
 ]
