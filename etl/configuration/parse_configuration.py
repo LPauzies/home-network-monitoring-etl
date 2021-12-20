@@ -2,31 +2,46 @@ import json
 from dataclasses import dataclass
 from typing import List
 
-class ConfigurationModel:
+class EntityModel:
     IP = "ip"
     DOMAIN = "domain"
     DESCRIPTION = "description"
 
+class ConfigurationModel:
+    MONITORING_DELAY = "monitoring_delay"
+    ROUTINES_DELAY = "routines_delay"
+    ENTITIES = "entities"
+
 @dataclass
-class Configuration:
+class Entity:
     ip: str
     domain: str
     description: str
+
+@dataclass
+class Configuration:
+    monitoring_delay: int
+    routines_delay: int
+    entities: List[Entity]
 
 class ConfigurationParser:
 
     def __init__(self, configuration_path: str) -> None:
         self.configuration_path = configuration_path
 
-    def parse(self) -> List[Configuration]:
-        parsed_configurations = []
+    def parse(self) -> Configuration:
+        parsed_entities = []
         with open(self.configuration_path, "r") as configuration_descriptor:
-            configurations = json.load(configuration_descriptor)
-            for configuration in configurations:
-                parsed_configuration = Configuration(
-                    configuration[ConfigurationModel.IP],
-                    configuration[ConfigurationModel.DOMAIN],
-                    configuration[ConfigurationModel.DESCRIPTION]
+            configuration = json.load(configuration_descriptor)
+            for entity in configuration[ConfigurationModel.ENTITIES]:
+                parsed_configuration = Entity(
+                    entity[EntityModel.IP],
+                    entity[EntityModel.DOMAIN],
+                    entity[EntityModel.DESCRIPTION]
                 )
-                parsed_configurations.append(parsed_configuration)
-        return parsed_configurations
+                parsed_entities.append(parsed_configuration)
+            return Configuration(
+                configuration[ConfigurationModel.MONITORING_DELAY],
+                configuration[ConfigurationModel.ROUTINES_DELAY],
+                parsed_entities
+            )

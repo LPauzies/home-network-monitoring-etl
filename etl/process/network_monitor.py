@@ -2,7 +2,7 @@ import math
 
 from typing import List
 from dataclasses import dataclass
-from datetime import date, datetime
+from datetime import datetime
 from pythonping import ping
 from dataclasses import dataclass
 
@@ -17,15 +17,15 @@ class Ping:
     response_time: float
     packet_loss: bool
 
-    def to_list(self) -> List[str]:
-        return list(map(str, [
-            self.event_time,
-            self.ip,
-            self.domain,
-            self.ip_description,
-            self.response_time,
-            self.packet_loss
-        ]))
+    def to_inserted_values(self) -> List[str]:
+        return [
+            str(self.event_time),
+            f"'{self.ip}'",
+            f"'{self.domain}'",
+            f"'{self.ip_description}'",
+            str(self.response_time),
+            str(self.packet_loss)
+        ]
 
 
 class NetworkMonitor:
