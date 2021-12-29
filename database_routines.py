@@ -3,9 +3,7 @@ import os
 from database.interface.sql_operations import SQLOperations
 
 # SQL scripts to be defined as routines
-ROUTINE_SQL_SCRIPTS = [
-    os.path.join("database", "routines", "routine_delete_last_values.sql")
-]
+ROUTINE_SQL_SCRIPTS = [os.path.join("routines", routine) for routine in os.listdir("routines")]
 
 def main() -> None:
     for script in ROUTINE_SQL_SCRIPTS:

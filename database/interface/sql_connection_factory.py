@@ -4,7 +4,8 @@ import logging
 # Create logger here
 logger = logging.getLogger(__name__)
 
-SQLITE_DATABASE_FILE = "database/sqlite/NetworkMonitoring.db"
+# Keep it relative to stay in "all services in folder" logic
+SQLITE_DATABASE_FILE = "../home-network-monitoring-database/NetworkMonitoring.db"
 
 class SQLConnectionFactory:
 
