@@ -24,7 +24,7 @@ class Ping:
             f"'{self.domain}'",
             f"'{self.ip_description}'",
             str(self.response_time),
-            str(self.packet_loss)
+            "0" if self.packet_loss else "1"
         ]
 
 

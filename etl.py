@@ -1,15 +1,16 @@
 import os
-from time import time
 from typing import List
-from datetime import datetime, timedelta
+from datetime import datetime
 from apscheduler.schedulers.blocking import BlockingScheduler
-from apscheduler.triggers.cron import CronTrigger
 from database_routines import main as main_routines
 from etl.configuration.parse_configuration import ConfigurationParser, Configuration
 from etl.process.network_monitor import NetworkMonitor
 from database.interface.sql_queries import SQLQueriesFactory
 from database.interface.sql_operations import SQLOperations
 from database.data_model.data_model import Ping
+
+import warnings
+warnings.filterwarnings("ignore")
 
 CONFIGURATION_FILE_PATH = os.path.join("etl-configuration.json")
 
@@ -26,6 +27,7 @@ def monitor_pings(configurations: List[Configuration]) -> None:
             Ping.Columns.ALL,
             ping.to_inserted_values()
         )
+        print(insertion_query)
         SQLOperations.execute_sql_query(insertion_query)
 
 def launch_routines() -> None:
@@ -47,7 +49,7 @@ def main() -> None:
     # Add monitoring job
     scheduler.add_job(monitor_pings, trigger="cron", args=[configuration.entities], second=f"*/{configuration.monitoring_delay}")
     # Add routines job
-    scheduler.add_job(launch_routines, trigger="interval", second=configuration.routines_delay)
+    scheduler.add_job(launch_routines, trigger="interval", seconds=configuration.routines_delay)
 
     # Said to user that he can easily get out the scheduler
     print('Press Ctrl+{0} to exit'.format('C' if os.name == 'nt' else 'Break'))
