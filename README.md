@@ -6,6 +6,8 @@ This repo setup the home network monitoring ETL.
 
 Launch ETL using `python etl.py`.
 
+> It is mandatory to use this soft using `sudo` privileges.
+
 ## Configuration
 
 The configuration file should be called `etl-configuration.json` and be structured as :

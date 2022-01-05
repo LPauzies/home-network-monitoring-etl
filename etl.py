@@ -16,10 +16,10 @@ CONFIGURATION_FILE_PATH = os.path.join("etl-configuration.json")
 
 ### JOBS
 
-def monitor_pings(configurations: List[Configuration]) -> None:
+def monitor_pings(configurations: List[Configuration], verbose=False) -> None:
     # For each configuration, make a ping
     current_time = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    print(f"Ping executed at {current_time}.")
+    if verbose: print(f"Ping executed at {current_time}.")
     for configuration in configurations:
         ping = NetworkMonitor.ping(configuration)
         insertion_query = SQLQueriesFactory.generate_insert_query(
@@ -27,13 +27,12 @@ def monitor_pings(configurations: List[Configuration]) -> None:
             Ping.Columns.ALL,
             ping.to_inserted_values()
         )
-        print(insertion_query)
         SQLOperations.execute_sql_query(insertion_query)
 
-def launch_routines() -> None:
+def launch_routines(verbose=False) -> None:
     # Launch routines for database
     current_time = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-    print(f"Routines executed at {current_time}.")
+    if verbose: print(f"Routines executed at {current_time}.")
     main_routines()
 
 ### ENTRY POINTS
@@ -47,9 +46,9 @@ def main() -> None:
     # Setup the scheduler
     scheduler = BlockingScheduler()
     # Add monitoring job
-    scheduler.add_job(monitor_pings, trigger="cron", args=[configuration.entities], second=f"*/{configuration.monitoring_delay}")
+    scheduler.add_job(monitor_pings, trigger="cron", args=[configuration.entities, True], second=f"*/{configuration.monitoring_delay}")
     # Add routines job
-    scheduler.add_job(launch_routines, trigger="interval", seconds=configuration.routines_delay)
+    scheduler.add_job(launch_routines, trigger="interval", args=[True], seconds=configuration.routines_delay)
 
     # Said to user that he can easily get out the scheduler
     print('Press Ctrl+{0} to exit'.format('C' if os.name == 'nt' else 'Break'))
