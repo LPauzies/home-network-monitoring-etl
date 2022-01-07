@@ -3,9 +3,19 @@
     "routines_delay": 3600,
     "entities": [
         {
-            "ip": "127.0.0.1",
-            "domain": "localhost",
-            "description": "loopback of current machine"
+            "ip": "192.168.1.1",
+            "domain": "router",
+            "description": "Home router"
+        },
+        {
+            "ip": "192.168.1.61",
+            "domain": "plex",
+            "description": "PleX media server"
+        },
+        {
+            "ip": "8.8.8.8",
+            "domain": "dns.google.com",
+            "description": "Google DNS server"
         }
     ]
 }

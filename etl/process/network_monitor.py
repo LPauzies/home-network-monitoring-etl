@@ -23,7 +23,7 @@ class Ping:
             f"'{self.domain}'",
             f"'{self.ip_description}'",
             str(self.response_time),
-            "0" if self.packet_loss else "1"
+            "1" if self.packet_loss else "0"
         ]
 
 
@@ -38,5 +38,5 @@ class NetworkMonitor:
             domain = configuration.domain,
             ip_description = configuration.description,
             response_time = math.ceil(response.rtt_avg * 100) / 100,
-            packet_loss = int(response.packet_loss) != 0
+            packet_loss = int(response.packet_loss) == 1
         )
