@@ -20,8 +20,9 @@ def monitor_pings(configurations: List[Configuration], verbose=False) -> None:
     # For each configuration, make a ping
     current_time = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
     if verbose: print(f"Ping executed at {current_time}.")
+    now = int(datetime.timestamp(datetime.now()))
     for configuration in configurations:
-        ping = NetworkMonitor.ping(configuration)
+        ping = NetworkMonitor.ping(configuration, now)
         insertion_query = SQLQueriesFactory.generate_insert_query(
             Ping.TABLE,
             Ping.Columns.ALL,

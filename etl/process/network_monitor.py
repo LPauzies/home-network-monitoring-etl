@@ -30,10 +30,10 @@ class Ping:
 class NetworkMonitor:
 
     @staticmethod
-    def ping(configuration: Configuration) -> Ping:
+    def ping(configuration: Configuration, now=int(datetime.timestamp(datetime.now()))) -> Ping:
         response = ping(configuration.ip, count=1)
         return Ping(
-            event_time = int(datetime.timestamp(datetime.now())),
+            event_time = now,
             ip = configuration.ip,
             domain = configuration.domain,
             ip_description = configuration.description,
