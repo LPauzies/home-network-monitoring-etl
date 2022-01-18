@@ -4,7 +4,7 @@
     "entities": [
         {
             "ip": "192.168.1.1",
-            "domain": "router",
+            "domain": "sfr.router",
             "description": "Home router"
         },
         {
@@ -13,9 +13,24 @@
             "description": "PleX media server"
         },
         {
+            "ip": "192.168.1.95",
+            "domain": "sfr.tv",
+            "description": "SFR TV"
+        },
+        {
+            "ip": "192.168.1.94",
+            "domain": "nvidia.shield",
+            "description": "Nvidia Shield Pro for TV"
+        },
+        {
             "ip": "8.8.8.8",
-            "domain": "dns.google.com",
-            "description": "Google DNS server"
+            "domain": "dns.google.public",
+            "description": "Public DNS from Google"
+        },
+        {
+            "ip": "104.160.136.3",
+            "domain": "riot.games",
+            "description": "Public servers from Riot Games"
         }
     ]
 }
