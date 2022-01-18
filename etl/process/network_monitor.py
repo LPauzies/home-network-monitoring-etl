@@ -37,6 +37,6 @@ class NetworkMonitor:
             ip = configuration.ip,
             domain = configuration.domain,
             ip_description = configuration.description,
-            response_time = math.ceil(response.rtt_avg * 100) / 100,
+            response_time = math.ceil(response.rtt_avg_ms * 100) / 100,
             packet_loss = int(response.packet_loss) == 1
         )
