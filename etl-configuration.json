@@ -28,9 +28,9 @@
             "description": "Public DNS from Google"
         },
         {
-            "ip": "104.160.136.3",
+            "ip": "213.136.12.232",
             "domain": "riot.games",
-            "description": "Public servers from Riot Games"
+            "description": "Public server from Riot Games"
         }
     ]
 }
